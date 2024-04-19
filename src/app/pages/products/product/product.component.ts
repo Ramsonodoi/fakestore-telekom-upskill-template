@@ -8,30 +8,29 @@ import { ProductsService } from 'src/app/core/service/products/products.service'
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+
   public products: TableProducts[] = [];
+  public search = '';
+  public  filteredProducts :TableProducts[] = [];
   public constructor(private product: ProductsService){
   }
   public ngOnInit(): void {
-    // this.getAllProducts();
     this.product.getAllProducts().subscribe(
       (data) => {
         this.products =data.normalizedProductsDetails;
-        console.log(this.products);
+        this.filteredProducts = this.products;
       }
     );
   }
   
 
-  // public getAllProducts() {
-  //   this.product.getAllProducts().subscribe(
-  //     (data) => {
-  //       this.products =data;
-  //     },
-  //     (error)=> {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
+
+  public onChange() {
+    this.filteredProducts = this.products.filter(product => 
+      product.title.toLowerCase().includes(this.search.toLowerCase())
+    );
+  }
+  
 
 
 }

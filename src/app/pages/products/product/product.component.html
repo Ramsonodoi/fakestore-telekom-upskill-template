@@ -1,8 +1,10 @@
 
 <main>
- 
+ <div class="search-container">
+    <input name="search" type="text" placeholder="Search..." [(ngModel)]="search" (input)="onChange()">
+ </div>
     <div class="main-container" >
-        <mat-card class="product-card" *ngFor="let product of products">
+        <mat-card class="product-card" *ngFor="let product of filteredProducts">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
         </mat-card-header>

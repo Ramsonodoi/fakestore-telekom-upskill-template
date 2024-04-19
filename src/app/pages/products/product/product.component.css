@@ -33,3 +33,18 @@
     column-gap: 2rem;
   }
 
+  .search-container input{
+    border: 1px solid #ccc; 
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 1rem;
+    margin-top:1rem ;
+    margin-left: 6em;
+    width: 100%;
+  }
+
+ 
+
+  .search-container{
+    width: 20rem;
+  }
