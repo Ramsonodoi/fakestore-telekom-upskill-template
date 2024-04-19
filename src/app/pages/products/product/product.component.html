@@ -1,0 +1,32 @@
+
+<main>
+ 
+    <div class="main-container" >
+        <mat-card class="product-card" *ngFor="let product of products">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+        </mat-card-header>
+        <div class="image-container">
+               <img mat-card-image src={{product.image}} alt="Photo of a Shiba Inu"> 
+        </div>
+    
+        <mat-card-content> 
+              <p>
+            {{product.title}}
+          </p> 
+            <div class="details-container">
+             
+          <p>
+            {{product.price | currency}}
+          </p>
+    
+          <p>
+            {{product.count}}
+          </p>
+            </div>
+         
+        </mat-card-content>
+      </mat-card>
+    </div>
+      
+</main>
