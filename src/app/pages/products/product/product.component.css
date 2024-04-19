@@ -1,0 +1,35 @@
+.product-card {
+    width: 350px;
+    height: 400px;
+     display: flex;
+     align-items: center;
+  }
+  
+  .image-container{
+     height: 250px;
+     width: 200px;
+    
+
+  }
+
+  .image-container img {
+    max-height: 100%;
+    width: 100%;
+    
+  }
+
+  .main-container{
+    margin-top: 10px;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  
+    
+  }
+
+  .details-container{
+    display: flex;
+    column-gap: 2rem;
+  }
+
