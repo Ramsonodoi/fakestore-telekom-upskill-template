@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-custominputfield',
@@ -10,6 +11,7 @@ export class CustominputfieldComponent {
   public placeholder!: string;
       @Input()
       public type!: string;  
+    @Input()  public  control = new FormControl();
       
 
 }
