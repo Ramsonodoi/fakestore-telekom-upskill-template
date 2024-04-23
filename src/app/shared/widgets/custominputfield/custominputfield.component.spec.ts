@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustominputfieldComponent } from './custominputfield.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 describe('CustominputfieldComponent', () => {
   let component: CustominputfieldComponent;
@@ -8,7 +9,7 @@ describe('CustominputfieldComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CustominputfieldComponent]
+      declarations: [CustominputfieldComponent, MatFormFieldModule]
     });
     fixture = TestBed.createComponent(CustominputfieldComponent);
     component = fixture.componentInstance;

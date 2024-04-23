@@ -8,9 +8,10 @@ import { TableProducts } from 'src/app/core/models/interfaces/productInterface';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  public totalQuantity: number[] = [];
 
-
-  public itemsInCart:TableProducts[] | undefined;
+  
+  public itemsInCart:TableProducts[] =[];
    
   public constructor(private cartService: CartService){}
 
@@ -22,18 +23,41 @@ export class CartComponent implements OnInit {
     if (this.itemsInCart.length > 0) {
       localStorage.setItem('itemsInCart', JSON.stringify(this.itemsInCart));
     }
-    this.itemsInCart = JSON.parse(localStorage.getItem('itemsInCart')??'');
+    const itemsInCart= (localStorage.getItem('itemsInCart'));
 
-
+    if (itemsInCart ){
+      this.itemsInCart =JSON.parse(itemsInCart);
+    }
+  
+    this.totalQuantity = this.itemsInCart.map(product => product.quantity);
   }
 
-  public removeCartItem(item: TableProducts){ 
-    this.cartService.removeCartList(item);
-    this.itemsInCart = this.cartService.itemsAddedToCart();
  
-  }
-
   public removeAllCartItems(){
     this.cartService.removeAllCartList();
+  }
+
+  public itemQuantity(product:TableProducts){
+    return this.cartService.Quantity(product);
+  }
+   
+
+  public increaseQuantity(index: number): void {
+    this.totalQuantity[index]++;
+  }
+
+  public decreaseQuantity(index: number): void {
+    if (this.totalQuantity[index] > 0) {
+      this.totalQuantity[index]--;
+    }
+  }
+
+  public removeCartItem(product: TableProducts): void {
+
+    const index = this.itemsInCart.indexOf(product);
+    if (index !== -1) {
+      this.itemsInCart.splice(index , 1);
+      this.totalQuantity.splice(index , 1);
+    }
   }
 }

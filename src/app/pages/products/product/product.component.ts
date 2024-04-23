@@ -47,7 +47,7 @@ export class ProductComponent implements OnInit {
   }
   
   public addToCart(product:TableProducts){
-    this.cartService.addtoCart(product);
+    this.cartService.addToCart(product);
     this.totalProducts =this.cartService.itemsAddedToCart().length;
   }
 

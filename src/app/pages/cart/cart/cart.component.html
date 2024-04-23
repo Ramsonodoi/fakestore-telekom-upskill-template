@@ -4,24 +4,29 @@
            <table class="product-table">
             <thead>
                 <tr>
-                 <th>Product Number </th>
                  <th> Product Name</th>
                  <th> Product Image</th>
                  <th> Description</th>
                  <th>Price</th>
-                 <th> Total</th>
+                 <th> Quantity</th>
                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let products of itemsInCart; let item = index">
-                        <td>{{item + 1}} </td>
                         <td>{{products.title}}</td>
-                        <td><img class="cart-image" src="{{products.image}} " alt="cart-item"></td>
+                        <td><img class="cart-image" [src]="products.image" alt="cart-item"></td>
                         <td>{{products.description}}</td>
-                        <!-- <td> {{products.total}} </td> -->
+                        <td>{{products.price | currency}}</td>
+                        <td> 
+                          <div class="main-quntity-container"><button (click)="increaseQuantity(item)">+</button></div>
+                          <div class="quantity-container">
+                            <input name="quantity" type="number" placeholder="" [(ngModel)]="totalQuantity[item]">
+                            <div class="main-quntity-container"><button (click)="decreaseQuantity(item)">-</button></div>
+                          </div>
+                        </td>
                         <td><app-custombutton (click)="removeCartItem(products)" class="delete-container" label="Delete"></app-custombutton></td>
-                    </tr>
+                      </tr>
                 </tbody>
            </table>
         </div>

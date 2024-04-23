@@ -1,3 +1,4 @@
+import { Product } from 'src/app/core/models/interfaces/productInterface';
 
 import { Injectable } from '@angular/core';
 import { CartProduct } from '../../models/interfaces/cartInterface';
@@ -12,20 +13,34 @@ export class CartService {
   public cartList:TableProducts[] = [];
   public productList = new BehaviorSubject<CartProduct[]>([]);
 
- 
 
-  public getProducts(){
-    return this.productList.asObservable();
-  }
-
-  public setProduct(product :CartProduct[] ) {
-   
-    this.productList.next(product);
-  }
   
-  public addtoCart(product: TableProducts){
+  public addToCart(product: TableProducts){
+
     this.cartList.push(product);
- 
+    this.cartList =  this.cartList.map((items)=>{
+      if (items.id === product.id){
+        return{...items, quantity: items.quantity +1 };
+         
+      }
+      return{...items};
+    });
+
+    console.log(this.cartList,'detail');
+    const cartItems =this.uniqeArray(this.cartList);
+    this.cartList = cartItems;
+    
+  
+    console.log(cartItems, 'cart');
+     
+  }
+
+  public uniqeArray(arr:TableProducts[]) {
+    return arr.filter((obj, index, self) => 
+      index === self.findIndex((o) => 
+        o.id === obj.id
+      )
+    );
   }
 
   public itemsAddedToCart(){
@@ -40,14 +55,17 @@ export class CartService {
         this.cartList.splice(index, 1);
       }
     });
-
- 
-    
     localStorage.setItem('itemsInCart',JSON.stringify(this.cartList) );
   }
 
   public removeAllCartList(){
     this.cartList=[];
   
+  }
+
+  public Quantity(product: TableProducts){
+    const quantityItem = this.cartList.filter(cartItem => product.id === cartItem.id);
+    const quantity = quantityItem.length;
+    return quantity;
   }
 }

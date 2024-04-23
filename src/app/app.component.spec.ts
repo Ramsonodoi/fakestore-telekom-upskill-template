@@ -1,11 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { LogoutComponent } from './pages/logout/logout.component';
+import { MatCardModule } from '@angular/material/card';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [RouterTestingModule],
-    declarations: [AppComponent]
+    declarations: [AppComponent, LogoutComponent,MatCardModule]
   }));
 
   it('should create the app', () => {
