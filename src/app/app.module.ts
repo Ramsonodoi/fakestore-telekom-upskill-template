@@ -18,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './pages/products/product/product.component';
 import { LogoutComponent } from './pages/logout/logout.component';
+import { CartComponent } from './pages/cart/cart/cart.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { LogoutComponent } from './pages/logout/logout.component';
     CustominputfieldComponent,
     CustombuttonComponent,
     ProductComponent,
-    LogoutComponent
+    LogoutComponent,
+    CartComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

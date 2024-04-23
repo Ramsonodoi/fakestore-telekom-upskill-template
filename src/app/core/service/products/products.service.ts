@@ -11,7 +11,9 @@ import { map } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductsService {
+  
   private products = `${environment.apiBaseUrl}${APIConstant.products.getAllProducts}`;
+
   private constructor(private http:HttpClient) {
     //
   }
@@ -27,7 +29,9 @@ export class ProductsService {
           image: products.image,
           category:products.category,
           rate:products.rating?.rate,
-          count:products.rating?.count
+          count:products.rating?.count,
+          description:products?.description,
+          id: products?.id
         }));
 
         return {
@@ -36,5 +40,8 @@ export class ProductsService {
         };
       })
     );
+  }
+  public getSingleProduct(id: number){
+    return this.http.get(this.products + `/${id}`);
   }
 }

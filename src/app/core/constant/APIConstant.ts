@@ -9,9 +9,10 @@ export const APIConstant = {
 
   products: {
     getAllProducts: '/products',
-  },
 
+  },
+ 
   cart: {
-    getAllCart: 'carts',
+    getAllCart: '/carts',
   },
 };
