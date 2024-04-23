@@ -1,5 +1,8 @@
+import { CartService } from './../../../core/service/cart/cart.service';
 import { Component, OnInit } from '@angular/core';
-import { Product, TableProducts } from 'src/app/core/models/interfaces/productInterface';
+import { Router } from '@angular/router';
+import { CartProduct } from 'src/app/core/models/interfaces/cartInterface';
+import {  TableProducts } from 'src/app/core/models/interfaces/productInterface';
 import { ProductsService } from 'src/app/core/service/products/products.service';
 
 @Component({
@@ -11,19 +14,31 @@ export class ProductComponent implements OnInit {
 
   public products: TableProducts[] = [];
   public search = '';
+  public totalProducts = 0;
   public  filteredProducts :TableProducts[] = [];
-  public constructor(private product: ProductsService){
+  public constructor(private productService: ProductsService, private cartService: CartService, private route: Router){
   }
   public ngOnInit(): void {
-    this.product.getAllProducts().subscribe(
+    this.productService.getAllProducts().subscribe(
       (data) => {
         this.products =data.normalizedProductsDetails;
         this.filteredProducts = this.products;
       }
     );
+    const storedItems = localStorage.getItem('itemsInCart');
+    if (storedItems) {
+      const parsedItems = JSON.parse(storedItems);
+      this.totalProducts = parsedItems.length;
+    }
+    else {
+      this.totalProducts  =this.cartService.itemsAddedToCart().length;
+    }
+
   }
   
-
+  public navigateToCartPage(){
+    this.route.navigate(['cart']);
+  }
 
   public onChange() {
     this.filteredProducts = this.products.filter(product => 
@@ -31,6 +46,15 @@ export class ProductComponent implements OnInit {
     );
   }
   
+  public addToCart(product:TableProducts){
+    this.cartService.addtoCart(product);
+    this.totalProducts =this.cartService.itemsAddedToCart().length;
+  }
 
+  public navigateToProductPage(productId: number) {
+    this.route.navigate(['product-detail'], { queryParams: { id: productId } });
+  }
+  
+  
 
 }

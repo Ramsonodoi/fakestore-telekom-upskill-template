@@ -1,0 +1,12 @@
+<div  class="product-card">
+    <h2 class="product-name">{{productDetails.title}}</h2>
+    <div class="product-image-container">
+        <img src="{{productDetails.image}}" alt="Product Image" class="product-image">
+    </div>
+   
+    <p class="product-description">{{productDetails.description}}</p>
+    <p> price: <span class="product-price ">{{productDetails.price | currency}} </span> </p>
+  
+    <p>category: {{productDetails.category}}</p>
+     
+</div>

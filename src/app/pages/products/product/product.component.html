@@ -1,17 +1,21 @@
 
+
 <main>
  <div class="search-container">
-    <input name="search" type="text" placeholder="Search..." [(ngModel)]="search" (input)="onChange()">
+    <input name="search" type="text" placeholder="Search For Products" [(ngModel)]="search" (input)="onChange()">
+ </div>
+ <div class="cart-container">
+<app-custombutton label= " {{totalProducts}} " (click)="navigateToCartPage()" routerLink="cart">
+  
+</app-custombutton>
  </div>
     <div class="main-container" >
         <mat-card class="product-card" *ngFor="let product of filteredProducts">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-        </mat-card-header>
-        <div class="image-container">
-               <img mat-card-image src={{product.image}} alt="Photo of a Shiba Inu"> 
+        <div class="image-container" (click)="navigateToProductPage(product.id)" (keydown)="navigateToProductPage(product.id)" tabindex="0">
+               <img mat-card-image src={{product.image}} alt="photo of products"> 
         </div>
     
+        <app-custombutton label="Add to Cart" (click)="addToCart(product)"></app-custombutton> 
         <mat-card-content> 
               <p>
             {{product.title}}
@@ -19,7 +23,7 @@
             <div class="details-container">
              
           <p>
-            {{product.price | currency}}
+           <span>PRICE: </span> {{product.price | currency}}
           </p>
     
           <p>

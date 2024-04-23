@@ -8,8 +8,8 @@
   .image-container{
      height: 250px;
      width: 200px;
-    
-
+    cursor: pointer;
+  
   }
 
   .image-container img {
@@ -43,8 +43,24 @@
     width: 100%;
   }
 
- 
+ .cart-container{
+  display: flex;
+  justify-content: end;
+  margin-top:1rem ;
+ }
 
   .search-container{
     width: 20rem;
+  }
+
+  .cart-icon{
+    font-size: 10px;
+    color: red;
+  }
+
+  .cart-main-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
   }
