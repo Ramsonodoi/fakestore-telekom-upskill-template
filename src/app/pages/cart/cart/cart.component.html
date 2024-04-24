@@ -13,16 +13,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let products of itemsInCart; let item = index">
+                    <tr *ngFor="let products of itemsInCart; let index = index">
                         <td>{{products.title}}</td>
                         <td><img class="cart-image" [src]="products.image" alt="cart-item"></td>
                         <td>{{products.description}}</td>
                         <td>{{products.price | currency}}</td>
                         <td> 
-                          <div class="main-quntity-container"><button (click)="increaseQuantity(item)">+</button></div>
+                          <div class="main-quntity-container"><button (click)="increaseQuantity(products,index)">+</button></div>
                           <div class="quantity-container">
-                            <input name="quantity" type="number" placeholder="" [(ngModel)]="totalQuantity[item]">
-                            <div class="main-quntity-container"><button (click)="decreaseQuantity(item)">-</button></div>
+                            <input name="quantity" type="number" placeholder="" [(ngModel)]="totalQuantity[index]">
+                            <div class="main-quntity-container"><button (click)="decreaseQuantity(products,index)">-</button></div>
                           </div>
                         </td>
                         <td><app-custombutton (click)="removeCartItem(products)" class="delete-container" label="Delete"></app-custombutton></td>

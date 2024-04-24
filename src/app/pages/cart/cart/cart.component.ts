@@ -17,47 +17,45 @@ export class CartComponent implements OnInit {
 
 
   public ngOnInit(): void {
-   
+    const cartData = localStorage.getItem('cartList');
+    if (cartData){
+      this.itemsInCart =JSON.parse(cartData);
+    } 
 
-    this.itemsInCart = this.cartService.itemsAddedToCart();
-    if (this.itemsInCart.length > 0) {
-      localStorage.setItem('itemsInCart', JSON.stringify(this.itemsInCart));
-    }
-    const itemsInCart= (localStorage.getItem('itemsInCart'));
-
-    if (itemsInCart ){
-      this.itemsInCart =JSON.parse(itemsInCart);
-    }
   
     this.totalQuantity = this.itemsInCart.map(product => product.quantity);
+
   }
+
+
 
  
-  public removeAllCartItems(){
-    this.cartService.removeAllCartList();
-  }
-
-  public itemQuantity(product:TableProducts){
-    return this.cartService.Quantity(product);
-  }
    
 
-  public increaseQuantity(index: number): void {
-    this.totalQuantity[index]++;
+  public increaseQuantity(products:TableProducts, index: number): void {
+    const cartQuantity= this.totalQuantity[index]++;
+
+
+
   }
 
-  public decreaseQuantity(index: number): void {
+  public decreaseQuantity(products:TableProducts,index: number): void {
     if (this.totalQuantity[index] > 0) {
       this.totalQuantity[index]--;
     }
+   
   }
 
   public removeCartItem(product: TableProducts): void {
+    this.itemsInCart = this.itemsInCart.filter((cartItem: TableProducts) => {
+      return product.id !== cartItem.id;
+    });
 
-    const index = this.itemsInCart.indexOf(product);
-    if (index !== -1) {
-      this.itemsInCart.splice(index , 1);
-      this.totalQuantity.splice(index , 1);
-    }
+  
+
+    localStorage.setItem('cartList', JSON.stringify(this.itemsInCart));
+
+
   }
+
 }

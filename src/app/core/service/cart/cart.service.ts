@@ -1,4 +1,4 @@
-import { Product } from 'src/app/core/models/interfaces/productInterface';
+
 
 import { Injectable } from '@angular/core';
 import { CartProduct } from '../../models/interfaces/cartInterface';
@@ -12,6 +12,7 @@ import { TableProducts } from '../../models/interfaces/productInterface';
 export class CartService {
   public cartList:TableProducts[] = [];
   public productList = new BehaviorSubject<CartProduct[]>([]);
+  public itemsInLocalStorage :TableProducts[] = [];
 
 
   
@@ -26,46 +27,50 @@ export class CartService {
       return{...items};
     });
 
-    console.log(this.cartList,'detail');
-    const cartItems =this.uniqeArray(this.cartList);
+    const cartItems =this.uniqueArray(this.cartList);
     this.cartList = cartItems;
     
-  
-    console.log(cartItems, 'cart');
-     
-  }
+    const cartData = localStorage.getItem('cartList');
+    if (cartData){
+      this.itemsInLocalStorage =JSON.parse(cartData);
+    } 
 
-  public uniqeArray(arr:TableProducts[]) {
-    return arr.filter((obj, index, self) => 
-      index === self.findIndex((o) => 
-        o.id === obj.id
-      )
+
+    this.cartList.forEach(item => {
+      const existingItem = this.itemsInLocalStorage.find(i => i.id === item.id);
+      if (existingItem) {
+        existingItem.quantity += item.quantity;
+      } else{
+        const newItem = {...item}
+        this.itemsInLocalStorage.push(newItem);
+      }
+    });
+
+
+     
+  
+    localStorage.setItem('cartList', JSON.stringify(this.itemsInLocalStorage));
+  }
+  
+  private uniqueArray(array: TableProducts[]): TableProducts[] {
+    return array.filter((item, index, self) => 
+      index === self.findIndex((t) => (
+        t.id === item.id
+      ))
     );
   }
+  
+
+  
 
   public itemsAddedToCart(){
     return this.cartList;
   }
+
+
  
 
-  public removeCartList(product:TableProducts){
-   
-    this.cartList.map((cartItem:TableProducts, index:number)=>{
-      if (product.id === cartItem.id){
-        this.cartList.splice(index, 1);
-      }
-    });
-    localStorage.setItem('itemsInCart',JSON.stringify(this.cartList) );
-  }
 
-  public removeAllCartList(){
-    this.cartList=[];
-  
-  }
 
-  public Quantity(product: TableProducts){
-    const quantityItem = this.cartList.filter(cartItem => product.id === cartItem.id);
-    const quantity = quantityItem.length;
-    return quantity;
-  }
+
 }

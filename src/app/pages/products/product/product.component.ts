@@ -25,14 +25,8 @@ export class ProductComponent implements OnInit {
         this.filteredProducts = this.products;
       }
     );
-    const storedItems = localStorage.getItem('itemsInCart');
-    if (storedItems) {
-      const parsedItems = JSON.parse(storedItems);
-      this.totalProducts = parsedItems.length;
-    }
-    else {
-      this.totalProducts  =this.cartService.itemsAddedToCart().length;
-    }
+    
+ 
 
   }
   
