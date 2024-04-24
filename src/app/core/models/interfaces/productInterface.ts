@@ -1,6 +1,7 @@
 export interface TableProducts extends BasicProduct {
   count:number,
-    rate:number
+    rate:number,
+    quantity: number 
 
 }
 

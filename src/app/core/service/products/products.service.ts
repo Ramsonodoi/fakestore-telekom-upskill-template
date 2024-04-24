@@ -31,7 +31,9 @@ export class ProductsService {
           rate:products.rating?.rate,
           count:products.rating?.count,
           description:products?.description,
-          id: products?.id
+          id: products?.id,
+          quantity: 0
+    
         }));
 
         return {

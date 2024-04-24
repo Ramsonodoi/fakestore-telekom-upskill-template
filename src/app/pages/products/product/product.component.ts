@@ -1,7 +1,6 @@
 import { CartService } from './../../../core/service/cart/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartProduct } from 'src/app/core/models/interfaces/cartInterface';
 import {  TableProducts } from 'src/app/core/models/interfaces/productInterface';
 import { ProductsService } from 'src/app/core/service/products/products.service';
 
@@ -25,14 +24,8 @@ export class ProductComponent implements OnInit {
         this.filteredProducts = this.products;
       }
     );
-    const storedItems = localStorage.getItem('itemsInCart');
-    if (storedItems) {
-      const parsedItems = JSON.parse(storedItems);
-      this.totalProducts = parsedItems.length;
-    }
-    else {
-      this.totalProducts  =this.cartService.itemsAddedToCart().length;
-    }
+    
+ 
 
   }
   
@@ -47,7 +40,7 @@ export class ProductComponent implements OnInit {
   }
   
   public addToCart(product:TableProducts){
-    this.cartService.addtoCart(product);
+    this.cartService.addToCart(product);
     this.totalProducts =this.cartService.itemsAddedToCart().length;
   }
 

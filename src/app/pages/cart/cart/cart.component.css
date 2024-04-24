@@ -79,6 +79,23 @@
     width: 120px;
 }
 
+.quantity-container{
+    width: 5rem;
+}
+
+
+.main-quntity-container{
+    display: flex;
+  justify-content: center;
+}
+
+.quantity-container input {
+    border: 1px solid #ccc; 
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 1rem;
+    width: 100%;
+}
 @media (max-width: 768px) {
     .table-container {
         overflow-x: scroll;

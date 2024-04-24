@@ -8,32 +8,54 @@ import { TableProducts } from 'src/app/core/models/interfaces/productInterface';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  public totalQuantity: number[] = [];
 
-
-  public itemsInCart:TableProducts[] | undefined;
+  
+  public itemsInCart:TableProducts[] =[];
    
   public constructor(private cartService: CartService){}
 
 
   public ngOnInit(): void {
+    const cartData = localStorage.getItem('cartList');
+    if (cartData){
+      this.itemsInCart =JSON.parse(cartData);
+    } 
+
+  
+    this.totalQuantity = this.itemsInCart.map(product => product.quantity);
+
+  }
+
+
+
+ 
    
 
-    this.itemsInCart = this.cartService.itemsAddedToCart();
-    if (this.itemsInCart.length > 0) {
-      localStorage.setItem('itemsInCart', JSON.stringify(this.itemsInCart));
+  public increaseQuantity(products:TableProducts, index: number): void {
+    const cartQuantity= this.totalQuantity[index]++;
+
+
+
+  }
+
+  public decreaseQuantity(products:TableProducts,index: number): void {
+    if (this.totalQuantity[index] > 0) {
+      this.totalQuantity[index]--;
     }
-    this.itemsInCart = JSON.parse(localStorage.getItem('itemsInCart')??'');
+   
+  }
+
+  public removeCartItem(product: TableProducts): void {
+    this.itemsInCart = this.itemsInCart.filter((cartItem: TableProducts) => {
+      return product.id !== cartItem.id;
+    });
+
+  
+
+    localStorage.setItem('cartList', JSON.stringify(this.itemsInCart));
 
 
   }
 
-  public removeCartItem(item: TableProducts){ 
-    this.cartService.removeCartList(item);
-    this.itemsInCart = this.cartService.itemsAddedToCart();
- 
-  }
-
-  public removeAllCartItems(){
-    this.cartService.removeAllCartList();
-  }
 }
