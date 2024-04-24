@@ -1,3 +1,4 @@
+import { CustombuttonComponent } from './shared/widgets/custombutton/custombutton.component';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
@@ -6,8 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    declarations: [AppComponent, LogoutComponent,MatCardModule]
+    imports: [RouterTestingModule,MatCardModule],
+    declarations: [AppComponent, LogoutComponent,CustombuttonComponent]
   }));
 
   it('should create the app', () => {

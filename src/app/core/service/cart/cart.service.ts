@@ -41,7 +41,7 @@ export class CartService {
       if (existingItem) {
         existingItem.quantity += item.quantity;
       } else{
-        const newItem = {...item}
+        const newItem = {...item};
         this.itemsInLocalStorage.push(newItem);
       }
     });

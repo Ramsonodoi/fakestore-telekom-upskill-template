@@ -1,7 +1,6 @@
 import { CartService } from './../../../core/service/cart/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartProduct } from 'src/app/core/models/interfaces/cartInterface';
 import {  TableProducts } from 'src/app/core/models/interfaces/productInterface';
 import { ProductsService } from 'src/app/core/service/products/products.service';
 

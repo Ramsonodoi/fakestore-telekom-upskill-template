@@ -1,8 +1,11 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductComponent } from './product.component';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/core/service/cart/cart.service';
+
+import { CustombuttonComponent } from 'src/app/shared/widgets/custombutton/custombutton.component';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
@@ -22,7 +25,8 @@ describe('ProductComponent', () => {
       providers: [
         {provide: ActivatedRoute, useValue: mockActivatedRoute},
         CartService
-      ]
+      ],
+      imports: [HttpClientModule, CustombuttonComponent]
     });
     fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
